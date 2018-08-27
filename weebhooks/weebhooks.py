@@ -2,6 +2,7 @@ import requests
 import aiohttp
 import json
 import errors
+from embed import Embed
 
 class Webhook:
     """
