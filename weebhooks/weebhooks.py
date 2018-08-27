@@ -16,7 +16,6 @@ class Webhook:
 
     `username` (str): The username that the webhook will use. Will use the webhook's name by default.
 
-    `tts` (bool): Whether to send the message with Text-to-Speech. Defaults to False.
     """
 
     def __init__(self, url, **options):
@@ -24,7 +23,7 @@ class Webhook:
         self.is_async = options.get("is_async", False)
         self.avatar_url = options.get("avatar_url", None)
         self.username = options.get("username", None) or options.get("name", None)
-        self.tts = options.get("tts", False)
+        
         
         self.session = aiohttp.ClientSession() if self.is_async else requests.Session() 
 
@@ -34,6 +33,7 @@ class Webhook:
         """
         embed = options.get("embed", None)
         embeds = options.get("embeds", None)
+        tts = options.get("tts", False)
         if embed and embeds:
             raise InvalidArgument("Cannot provide both embed and embeds parameters.")
         data = {
@@ -41,13 +41,12 @@ class Webhook:
             "embeds": [embed] if embed else embeds,
             "avatar_url": self.avatar_url,
             "username": self.username,
-            "tts": self.tts
+            "tts": tts
         }
         headers = {
             "Content-Type": "application/json"
         }
-        b = await self.session.post(self.url, data=json.dumps(data), headers=headers)
-        b = await b.json()
+        b = self.session.post(self.url, data=json.dumps(data), headers=headers)
         return b
 
     
@@ -61,9 +60,12 @@ class Webhook:
         `embed` (weebhooks.Embed): An Embed object for the bot to send. If this is provided, `embeds` cannot be provided.
 
         `embeds` (List: weebhooks.Embed): A List of Embed objects for the bot to send. If this is provided, `embed` cannot be provided.
+        
+        `tts` (bool): Whether to send the message with Text-to-Speech. Defaults to False.
         """
         embed = options.get("embed", None)
         embeds = options.get("embeds", None)
+        tts = options.get("tts", False)
         if self.is_async:
             return self._send_async(content, **options)
         data = {
@@ -71,11 +73,10 @@ class Webhook:
             "embeds": [embed] if embed else embeds,
             "avatar_url": self.avatar_url,
             "username": self.username,
-            "tts": self.tts
+            "tts": tts
         }
         headers = {
             "Content-Type": "application/json"
         }
-        b = self.session.post(self.url, data=json.dumps(data), headers=headers)
-        b = b.json()    
+        b = self.session.post(self.url, data=json.dumps(data), headers=headers)    
         return b
