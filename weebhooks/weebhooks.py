@@ -38,7 +38,7 @@ class Webhook:
             raise InvalidArgument("Cannot provide both embed and embeds parameters.")
         data = {
             "content": content,
-            "embeds": [embed] if embed else embeds,
+            "embeds": [embed.results] if embed else list(map(lambda x: x.results, embeds)),
             "avatar_url": self.avatar_url,
             "username": self.username,
             "tts": tts
@@ -70,7 +70,7 @@ class Webhook:
             return self._send_async(content, **options)
         data = {
             "content": content,
-            "embeds": [embed] if embed else embeds,
+            "embeds": [embed.results] if embed else list(map(lambda x: x.results, embeds)),
             "avatar_url": self.avatar_url,
             "username": self.username,
             "tts": tts

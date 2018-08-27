@@ -25,6 +25,18 @@ class Embed:
         self.image = None
         self.thumbnail = None
         self.video = None
+        self.results = {
+            "title": self.title,
+            "description": self.description,
+            "url": self.url,
+            "timestamp": self.timestamp,
+            "color": self.color,
+            "fields": self.fields,
+            "footer": self.footer,
+            "image": self.image,
+            "thumbnail": self.thumbnail,
+            "video": self.video
+        }
 
 
     def add_field(self, **options):
