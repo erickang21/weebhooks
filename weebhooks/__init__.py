@@ -1,3 +1,3 @@
 from .weebhooks import Webhook
-import errors
+from .errors import InvalidArgument
 from .embed import Embed

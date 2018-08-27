@@ -1,8 +1,8 @@
 import requests
 import aiohttp
 import json
-import errors
-from embed import Embed
+from .errors import InvalidArgument
+from .embed import Embed
 
 class Webhook:
     """
@@ -34,6 +34,8 @@ class Webhook:
         """
         embed = options.get("embed", None)
         embeds = options.get("embeds", None)
+        if embed and embeds:
+            raise InvalidArgument("Cannot provide both embed and embeds parameters.")
         data = {
             "content": content,
             "embeds": [embed] if embed else embeds,
