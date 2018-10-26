@@ -39,24 +39,21 @@ class Embed:
         }
 
 
-    def add_field(self, **options):
-        name = options.get("name", None)
-        value = options.get("value", None)
-        inline = options.get("inline", True)
+    def add_field(self, name=None, value=None, inline=True):
         data = {
             "name": name,
             "value": value,
             "inline": inline
         }
         self.fields.append(data)
+        return self
 
-    def set_footer(self, **options):
-        text = options.get("text", None)
-        icon_url = options.get("icon_url", None)
+    def set_footer(self, text=None, icon_url=None):
         self.footer = {
             "text": text,
             "icon_url": icon_url
         }
+        return self
 
     def set_author(self, **options):
         name = options.get("name", None)
@@ -68,29 +65,26 @@ class Embed:
             "icon_url": icon_url
         }
 
-    def set_image(self, url, **options):
-        height = options.get("height", None)
-        width = options.get("width", None)
+    def set_image(self, url, height=None, width=None):
         self.image = {
             "url": url,
             "height": height,
             "width": width
         }
+        return self
 
-    def set_thumbnail(self, url, **options):
-        height = options.get("height", None)
-        width = options.get("width", None)
+    def set_thumbnail(self, url, height=None, width=None):
         self.thumbnail = {
             "url": url,
             "height": height,
             "width": width
         }
+        return self
 
-    def set_video(self, url, **options):
-        height = options.get("height", None)
-        width = options.get("width", None)
+    def set_video(self, url, height=None, width=None):
         self.video = {
             "url": url,
             "height": height,
             "width": width
         }
+        return self

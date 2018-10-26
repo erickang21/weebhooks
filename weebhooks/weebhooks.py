@@ -1,6 +1,8 @@
 import requests
 import aiohttp
+
 import json
+
 from .errors import InvalidArgument
 from .embed import Embed
 
@@ -27,13 +29,10 @@ class Webhook:
         
         self.session = aiohttp.ClientSession() if self.is_async else requests.Session() 
 
-    async def _send_async(self, content, **options):
+    async def _send_async(self, content=None, *, embed=None, embeds=None, tts=False):
         """
         Private function to send in async.
         """
-        embed = options.get("embed", None)
-        embeds = options.get("embeds", None)
-        tts = options.get("tts", False)
         if embed and embeds:
             raise InvalidArgument("Cannot provide both embed and embeds parameters.")
         data = {
@@ -52,7 +51,7 @@ class Webhook:
 
     
 
-    def send(self, content, **options):
+    def send(self, content=None, *, embed=None, embeds=None, tts=False):
         """
         Sends the actual webhook message.
 
@@ -64,11 +63,8 @@ class Webhook:
         
         `tts` (bool): Whether to send the message with Text-to-Speech. Defaults to False.
         """
-        embed = options.get("embed", None)
-        embeds = options.get("embeds", None)
-        tts = options.get("tts", False)
         if self.is_async:
-            return self._send_async(content, **options)
+            return self._send_async(content=content, embed=embed, embeds=embeds, tts=tts)
         data = {
             "content": content,
             "avatar_url": self.avatar_url,
