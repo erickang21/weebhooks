@@ -8,7 +8,7 @@ pip install weebhooks
 
 ## Usage
 ```py
-from webhooks import Weebhook, Embed
+from weebhooks import Weebhook, Embed
 
 hook = Weebhook("WebhookURL", is_async=False)
 hook.send("Hello World!")
@@ -19,7 +19,7 @@ hook.send(embed=em)
 ## Async
 ```py
 import asyncio
-from webhooks import Weebhook
+from weebhooks import Weebhook
 
 async def main():
     hook = Webhook("URL", is_async=True)
