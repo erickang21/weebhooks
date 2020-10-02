@@ -23,7 +23,7 @@ from webhooks import Weebhook
 
 async def main():
     hook = Webhook("URL", is_async=True)
-    await hook.send("Hello, Async!")
+    await hook.send("Hello, Asynciful World!")
 
 asyncio.get_event_loop().run_until_complete(main())
 ```
