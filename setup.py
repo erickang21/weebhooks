@@ -1,4 +1,5 @@
 import setuptools
+import math
 
 description = "weebhooks - A lib for interacting with Discord webhooks."
 #long_description = open("README.md").read()
