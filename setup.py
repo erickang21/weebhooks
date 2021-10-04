@@ -1,6 +1,9 @@
 import setuptools
 import math
 
+#learn to use square root
+print(math.sqrt(4))
+
 description = "weebhooks - A lib for interacting with Discord webhooks."
 #long_description = open("README.md").read()
 version = "1.0.0"
