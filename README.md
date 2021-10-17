@@ -29,4 +29,4 @@ asyncio.get_event_loop().run_until_complete(main())
 ```
 
 ## License
-[MIT](LICENSE)
+[MIT](LICENSE). It's a library. C'mon.
